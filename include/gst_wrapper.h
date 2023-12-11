@@ -41,6 +41,7 @@ namespace gstwrapper
         std::string elem_name;
         int cvt_state(ElementState state);
         uint8_t link(void *src, void *target, std::string filter);
+        uint8_t unlink(void *src, void *target);
 
     public:
         GstElement();
@@ -56,6 +57,16 @@ namespace gstwrapper
             if (false == link(this->get_element(), element->get_element(), filter))
             {
                 std::cout << "[err] element can not be link: " << elem_name << "<==>" << element->elem_name << " \n";
+            }
+            return element;
+        }
+
+        template <typename T>
+        T &unlink(T &element)
+        {
+            if (false == unlink(this->get_element(), element->get_element()))
+            {
+                std::cout << "[err] element can not unlink: " << elem_name << "<==>" << element->elem_name << " \n";
             }
             return element;
         }

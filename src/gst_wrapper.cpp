@@ -43,10 +43,10 @@ namespace gstwrapper
     uint8_t GstElement::link(void *src, void *target, std::string filter)
     {
         auto source_ptr = reinterpret_cast<::GstElement *>(src);
-        auto elem_ptr = reinterpret_cast<::GstElement *>(target);
+        auto target_ptr = reinterpret_cast<::GstElement *>(target);
         if (filter == "")
         {
-            if (gst_element_link(source_ptr, elem_ptr) != true)
+            if (gst_element_link(source_ptr, target_ptr) != true)
             {
                 return false;
             }
@@ -54,11 +54,18 @@ namespace gstwrapper
         else
         {
             auto caps = gst_caps_from_string(filter.c_str());
-            if (gst_element_link_filtered(source_ptr, elem_ptr, caps) != true)
+            if (gst_element_link_filtered(source_ptr, target_ptr, caps) != true)
             {
                 return false;
             }
         }
+        return true;
+    }
+    uint8_t GstElement::unlink(void *src, void *target)
+    {
+        auto source_ptr = reinterpret_cast<::GstElement *>(src);
+        auto target_ptr = reinterpret_cast<::GstElement *>(target);
+        gst_element_unlink(source_ptr, target_ptr);
         return true;
     }
 
@@ -118,7 +125,7 @@ namespace gstwrapper
             gst_bin_add(GST_BIN(elem), raw_ptr);
         }
     }
-    
+
     GstPipeline::~GstPipeline()
     {
         bin_elems.clear();

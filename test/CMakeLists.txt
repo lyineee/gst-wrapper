@@ -13,6 +13,9 @@ target_link_libraries(test_tee gst-wrapper)
 add_executable(test_appsrc test_appsrc.cpp)
 target_link_libraries(test_appsrc gst-wrapper)
 
+add_executable(test_unlink test_unlink.cpp)
+target_link_libraries(test_unlink gst-wrapper)
+
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 include(CPack)
