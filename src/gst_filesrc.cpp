@@ -5,9 +5,8 @@
 
 namespace gstwrapper
 {
-    GstFilesrc::GstFilesrc(std::string file_path_) : file_path(file_path_)
+    GstFilesrc::GstFilesrc(std::string file_path_) : GstElement("filesrc"), file_path(file_path_)
     {
-        elem = gst_element_factory_make("filesrc", nullptr);
         set_property("location", file_path.c_str());
     }
 

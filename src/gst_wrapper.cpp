@@ -40,7 +40,7 @@ namespace gstwrapper
             gst_init(0, nullptr);
         }
     }
-    void GstElement::link(void *src, void *target, std::string filter)
+    uint8_t GstElement::link(void *src, void *target, std::string filter)
     {
         auto source_ptr = reinterpret_cast<::GstElement *>(src);
         auto elem_ptr = reinterpret_cast<::GstElement *>(target);
@@ -48,7 +48,7 @@ namespace gstwrapper
         {
             if (gst_element_link(source_ptr, elem_ptr) != true)
             {
-                std::cout << "element can not be link\n";
+                return false;
             }
         }
         else
@@ -56,9 +56,10 @@ namespace gstwrapper
             auto caps = gst_caps_from_string(filter.c_str());
             if (gst_element_link_filtered(source_ptr, elem_ptr, caps) != true)
             {
-                std::cout << "element can not be link\n";
+                return false;
             }
         }
+        return true;
     }
 
     GstElement::GstElement() { init_gst(); };
@@ -117,24 +118,7 @@ namespace gstwrapper
             gst_bin_add(GST_BIN(elem), raw_ptr);
         }
     }
-    // GstPipeline &link(GstElement::SharedPtr gst_elem)
-    // {
-    //     auto elem_ptr = reinterpret_cast<::GstElement *>(gst_elem->get_element());
-    //     gst_bin_add(GST_BIN(elem), elem_ptr);
-    //     bin_elems.emplace_back(gst_elem);
-    //     if (bin_elems.size() > 1)
-    //     {
-    //         if (gst_element_link(current_elem, elem_ptr) != true)
-    //         {
-    //             std::cout << "element can not be link\n";
-    //         }
-    //     }
-    //     else
-    //     {
-    //         current_elem = elem_ptr;
-    //     }
-    //     return *this;
-    // }
+    
     GstPipeline::~GstPipeline()
     {
         bin_elems.clear();

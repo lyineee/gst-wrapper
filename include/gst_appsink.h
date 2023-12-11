@@ -1,48 +1,12 @@
-#include "gst_wrapper.h"
-
 #include <functional>
+
+#include "gst_wrapper.h"
+#include "gst_sample_data.h"
 
 #ifndef GST_APPSINK_H
 #define GST_APPSINK_H
 namespace gstwrapper
 {
-
-    class SampleData
-    {
-        void *sample = nullptr;
-        void *info = nullptr;
-        void *buffer = nullptr;
-        bool is_parse = false;
-        struct SampleDataInternal
-        {
-            const uint8_t *data;
-            uint64_t length;
-        };
-        SampleDataInternal sample_data;
-
-    private:
-        bool try_parse_info();
-
-    public:
-        SampleData(void *sam);
-        SampleData(SampleData &) = delete;
-        SampleData(SampleData &&rhs);
-        ~SampleData();
-
-        SampleData &operator=(SampleData &&rhs);
-        SampleDataInternal *operator->()
-        {
-            if (!try_parse_info())
-            {
-                sample_data.length = 0;
-            }
-            return &sample_data;
-        }
-
-        const uint8_t *data();
-        uint64_t length();
-    };
-
     class GstAppsink : public GstElement
     {
         using SampleCallback = std::function<void(SampleData)>;

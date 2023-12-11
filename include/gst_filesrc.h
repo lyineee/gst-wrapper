@@ -12,8 +12,8 @@ namespace gstwrapper
         std::string file_path;
 
     public:
+        using SharedPtr = std::shared_ptr<GstFilesrc>;
         GstFilesrc(std::string file_path_);
-
         void set_location(std::string file_path_);
     };
 };

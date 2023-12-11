@@ -3,6 +3,8 @@
 #include <vector>
 #include <memory>
 
+#include <gst/gst.h>
+
 #ifndef GST_WRAPPER_H
 #define GST_WRAPPER_H
 namespace gstwrapper
@@ -20,6 +22,12 @@ namespace gstwrapper
     {
     };
 
+    struct GstPad
+    {
+        void *pad;
+        GstPad(void *pad_) : pad(pad_){};
+    };
+
     class GstElement
     {
     public:
@@ -32,7 +40,7 @@ namespace gstwrapper
         void *elem;
         std::string elem_name;
         int cvt_state(ElementState state);
-        void link(void *src, void *target, std::string filter);
+        uint8_t link(void *src, void *target, std::string filter);
 
     public:
         GstElement();
@@ -45,7 +53,10 @@ namespace gstwrapper
         template <typename T>
         T &link(T &element, const std::string filter = "")
         {
-            link(this->get_element(), element->get_element(), filter);
+            if (false == link(this->get_element(), element->get_element(), filter))
+            {
+                std::cout << "[err] element can not be link: " << elem_name << "<==>" << element->elem_name << " \n";
+            }
             return element;
         }
 
@@ -61,7 +72,6 @@ namespace gstwrapper
         GstPipeline();
         GstPipeline(std::string pipeline_str);
         void add_elem(std::vector<GstElement::SharedPtr> elems);
-        ;
         ~GstPipeline();
     };
 

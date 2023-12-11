@@ -9,9 +9,6 @@
 using namespace std::chrono_literals;
 int main(int argc, char *argv[])
 {
-    /* code */
-    // gst_init(&argc, &argv);
-
     auto test_src = std::make_shared<gstwrapper::GstElement>("videotestsrc");
     auto sink = std::make_shared<gstwrapper::GstElement>("autovideosink");
     auto cuda_up = std::make_shared<gstwrapper::GstElement>("cudaupload");
