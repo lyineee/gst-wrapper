@@ -3,8 +3,6 @@
 #include <vector>
 #include <memory>
 
-#include <gst/gst.h>
-
 #ifndef GST_WRAPPER_H
 #define GST_WRAPPER_H
 namespace gstwrapper

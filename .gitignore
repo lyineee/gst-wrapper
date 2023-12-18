@@ -2,3 +2,5 @@
 build/
 
 *.h264
+out/
+opt/

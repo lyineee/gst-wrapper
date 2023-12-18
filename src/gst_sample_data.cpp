@@ -1,5 +1,6 @@
-#include "gst_sample_data.h"
+#include <gst/gst.h>
 
+#include "gst_wrapper/gst_sample_data.h"
 namespace gstwrapper
 {
     bool SampleData::try_parse_info()

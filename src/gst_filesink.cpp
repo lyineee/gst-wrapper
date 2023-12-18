@@ -1,7 +1,7 @@
 
 #include <gst/gst.h>
 
-#include "gst_filesink.h"
+#include "gst_wrapper/gst_filesink.h"
 
 namespace gstwrapper
 {

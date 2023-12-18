@@ -1,17 +1,18 @@
-#include "gst_wrapper.h"
+#include "gst_wrapper/gst_wrapper.h"
 
 #include <gst/gst.h>
 #include <gst/gstobject.h>
 #include <gst/app/gstappsink.h>
 #include <functional>
+#include <gst/gstsample.h>
+#include <gst/gstbufferlist.h>
 
 #include <thread>
 #include <chrono>
-#include "gst_appsink.h"
+#include "gst_wrapper/gst_appsink.h"
 namespace gstwrapper
 {
 
-   
     GstAppsink::GstAppsink() : GstElement("appsink") {}
     void GstAppsink::set_sample_handle(SampleCallback f)
     {

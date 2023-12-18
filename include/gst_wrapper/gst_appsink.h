@@ -1,7 +1,7 @@
 #include <functional>
 
-#include "gst_wrapper.h"
-#include "gst_sample_data.h"
+#include "gst_wrapper/gst_wrapper.h"
+#include "gst_wrapper/gst_sample_data.h"
 
 #ifndef GST_APPSINK_H
 #define GST_APPSINK_H

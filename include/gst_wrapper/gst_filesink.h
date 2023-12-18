@@ -1,4 +1,4 @@
-#include "gst_wrapper.h"
+#include "gst_wrapper/gst_wrapper.h"
 
 #ifndef GST_FILESINK_H
 #define GST_FILESINK_H

@@ -1,6 +1,6 @@
 #include <string>
 
-#include "gst_wrapper.h"
+#include "gst_wrapper/gst_wrapper.h"
 
 #ifndef GST_FILESRC_H
 #define GST_FILESRC_H
